@@ -3,7 +3,12 @@ const cors = require('cors')
 const multer = require('multer')
 const { Queue } = require('bullmq');
 
-const queue = new Queue('file-upload')
+const queue = new Queue('file-upload', {
+    connection: {
+        host: 'localhost',
+        port: '6379'
+    }
+})
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
