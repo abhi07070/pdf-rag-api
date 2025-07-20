@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/abhi07070/pdf-rag-api#readme",
   "dependencies": {
+    "bullmq": "^5.56.5",
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "multer": "^2.0.2"
