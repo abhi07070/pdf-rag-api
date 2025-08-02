@@ -26,6 +26,7 @@
     "@langchain/textsplitters": "^0.1.0",
     "bullmq": "^5.56.5",
     "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "langchain": "^0.3.30",
     "multer": "^2.0.2",

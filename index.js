@@ -2,6 +2,9 @@ const express = require('express')
 const cors = require('cors')
 const multer = require('multer')
 const { Queue } = require('bullmq');
+const dotenv = require('dotenv');
+
+dotenv.config()
 
 const queue = new Queue('file-upload', {
     connection: {

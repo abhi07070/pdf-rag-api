@@ -11,6 +11,7 @@ const worker = new Worker(
         try {
             console.log(`Job:`, job.data);
             const data = JSON.parse(job.data);
+
             /*
             Path: data.path
             read the pdf from path,
@@ -23,21 +24,12 @@ const worker = new Worker(
             const loader = new PDFLoader(data.path);
             const docs = await loader.load();
 
-
-            // const textSplitter = new CharacterTextSplitter({
-            //     chunkSize: 300,
-            //     chunkOverlap: 0,
-            // });
-
-            // const allText = docs.map(doc => doc.pageContent).join("\n");
-
-            // const texts = await textSplitter.splitText(docs);
-            // console.log("texts: ", texts);
+            console.log("docs: ", docs)
 
             const embeddings = new OpenAIEmbeddings({
                 model: 'text-embedding-3-small',
-                apiKey: '',
-                batchSize: 5, // Smaller batches reduce pressure
+                apiKey: process.env.OPEN_AI,
+                batchSize: 5,
                 maxConcurrency: 2,
             });
 
@@ -49,7 +41,7 @@ const worker = new Worker(
                 }
             );
             try {
-                await vectorStore.addDocuments(splitDocs);
+                await vectorStore.addDocuments(docs);
                 console.log("✅ All documents added to vector store");
             } catch (error) {
                 console.error("❌ Failed to add documents:", error.message);
