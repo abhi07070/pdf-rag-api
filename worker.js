@@ -1,9 +1,9 @@
 const { Worker } = require('bullmq');
 const { OpenAIEmbeddings } = require("@langchain/openai");
 const { QdrantVectorStore } = require("@langchain/qdrant");
-const { Document } = require("@langchain/core/documents");
 const { PDFLoader } = require("@langchain/community/document_loaders/fs/pdf");
-const { CharacterTextSplitter } = require("@langchain/textsplitters");
+const dotenv = require('dotenv');
+dotenv.config()
 
 const worker = new Worker(
     'file-upload',
@@ -29,8 +29,6 @@ const worker = new Worker(
             const embeddings = new OpenAIEmbeddings({
                 model: 'text-embedding-3-small',
                 apiKey: process.env.OPEN_AI,
-                batchSize: 5,
-                maxConcurrency: 2,
             });
 
             const vectorStore = await QdrantVectorStore.fromExistingCollection(
@@ -58,7 +56,7 @@ const worker = new Worker(
     },
 
     {
-        concurrency: 1,
+        concurrency: 100,
         connection: {
             host: 'localhost',
             port: '6379'
