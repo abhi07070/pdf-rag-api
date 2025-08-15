@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/abhi07070/pdf-rag-api#readme",
   "dependencies": {
-    "@langchain/community": "^0.3.49",
+    "@langchain/community": "^0.2.32",
     "@langchain/core": "^0.3.66",
     "@langchain/openai": "^0.6.2",
     "@langchain/qdrant": "^0.1.2",
